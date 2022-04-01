@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <div style={{ minHeight: 'calc(100vh - 52px)' }} className="flex flex-col justify-center items-center py-4 px-2">
-      <h1 className="mb-3 font-bold text-5xl leading-tight text-transparent bg-clip-text bg-gradient-to-tr from-blue-100 to-gray-400">Cartas contra la web</h1>
+      <h1 className="mb-3 font-bold text-5xl leading-tight text-transparent bg-clip-text bg-gradient-to-tr from-blue-100 to-gray-400 text-white">Cartas contra Dispatch 🤣</h1>
       <div className="md:flex flex-row justify-center items-center mt-8 mb-12 space-y-6 md:space-y-0 md:space-x-6">
         <ButtonCard
           as={motion.button}
