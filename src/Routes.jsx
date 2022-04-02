@@ -16,7 +16,7 @@ export default function Routes() {
       <Route path="/" element={<Home />} />
       <Route path="/publicgames" element={<PublicGames />} />
       <Route path="/newgame" element={<CreateGame />} />
-      <Route path="/join/:id" element={<JoinGame />} />
+      <Route exact path="/join/:id" element={<JoinGame />} />
       <Route path="/game/:id" element={<PlayGame />} />
       <Route path="/guide" element={<Guide />} />
       <Route path="/decks" element={<DeckList />} />
