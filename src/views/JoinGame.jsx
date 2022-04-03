@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { Copy, CrownSimple, Stack, User } from 'phosphor-react'
 import Button from '@/components/Button'
@@ -9,6 +9,7 @@ import { editGame, joinGame } from '@/lib/gameUtils'
 import { useQueryClient } from 'react-query'
 import usePlayerId from '@/lib/usePlayerId'
 import withGame from '@/lib/withGame'
+import { leaveGame, useGameList } from '@/lib/gameUtils'
 
 const MIN_PLAYERS = 2
 
@@ -18,6 +19,8 @@ function JoinGameUI({ socket, game }) {
   const playerId = usePlayerId()
   const playerIsHost = socket && game && game.players[0] && game.players[0].id === playerId
   const [loading, setLoading] = useState(false)
+  const { games } = useGameList()
+  const currentGame = games.find(g => g.players.find(p => p.id === playerId))
 
   useEffect(() => {
     socket.on('game:edit', game => {
@@ -50,6 +53,15 @@ function JoinGameUI({ socket, game }) {
     socket.emit('game:start', game.id)
   }
 
+  function salirSala(){
+    try{
+      leaveGame({ socket, game: currentGame, playerId })
+    navigate("/")
+    } catch{
+      window.location.reload(false);
+    }
+  }
+
   return (
     <Container>
       <Button
@@ -60,6 +72,8 @@ function JoinGameUI({ socket, game }) {
       >
         <ArrowLeftIcon className="w-5 h-5" />
       </Button>
+      <h1>.</h1>
+      <button onClick={()=>salirSala()}>Salirse de la partida</button>
       <h2 className="mt-4 text-3xl font-semibold">Unirse a partida</h2>
       <p className="mb-8 text-2xl text-gray-300 uppercase">ID {game.id}</p>
 

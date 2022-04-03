@@ -18,10 +18,10 @@ export default function Home() {
       navigate(`/join/${currentGame.id}`)
     } else {
       navigate('/publicgames')
-      // const id = window.prompt('Introduce el ID de la partida (4 digitos)')
-      // if (id && id.length === 4) {
-      //   navigate(`/join/${id}`)
-      // }
+      const id = window.prompt('Introduce el ID de la partida (4 digitos)')
+      if (id && id.length === 4) {
+        navigate(`/join/${id}`)
+      }
     }
   }
 
