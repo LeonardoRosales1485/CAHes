@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { editGame, joinGame, leaveGame } from '@/lib/gameUtils'
+import { editGame, joinGame, leaveGame, useGameList } from '@/lib/gameUtils'
 import { useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import withGame from '@/lib/withGame'
@@ -37,6 +37,8 @@ function PlayGameUI({ socket, game }) {
   const counterAnimation = useAnimation()
   const [winner, setWinner] = useState(null)
   const [showRoundModal, setShowRoundModal] = useState(false)
+  const { games } = useGameList()
+  const currentGame = games.find(g => g.players.find(p => p.id === playerId))
 
   useEffect(() => {
     socket.on('game:edit', game => {
@@ -142,8 +144,15 @@ function PlayGameUI({ socket, game }) {
             : '... Esperando a que los jugadores envíen sus cartas'}
         </p>
       )}
+    <button onClick={()=>salirSala()} className="mt-4 mb-4">Salir de la partida</button>
     </main>
   )
+  function salirSala(){
+
+      leaveGame({ socket, game: currentGame, playerId })
+    navigate("/")
+
+  }
 }
 
 function GameOverModal({ closeModal, game }) {

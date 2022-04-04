@@ -72,8 +72,8 @@ function JoinGameUI({ socket, game }) {
       >
         <ArrowLeftIcon className="w-5 h-5" />
       </Button>
-      <h1>.</h1>
-      <button onClick={()=>salirSala()}>Salirse de la partida</button>
+      <br/>
+      <button onClick={()=>salirSala()} className="mt-4 text-decoration-line: underline">Salir de la sala</button>
       <h2 className="mt-4 text-3xl font-semibold">Unirse a partida</h2>
       <p className="mb-8 text-2xl text-gray-300 uppercase">ID {game.id}</p>
 
